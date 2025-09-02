@@ -1,0 +1,1394 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URBAN STREET | Moda Streetwear</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;800&family=Roboto:wght@300;400;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+:root {
+            --primary: #000000;
+            --secondary: #ffffff;
+            --accent: #888888;
+            --accent-dark: #666666;
+            --accent-light: #aaaaaa;
+            --accent-yellow: #ffd700;
+            --accent-yellow-dark: #e6c200;
+            --accent-red: #ff3333;
+            --accent-red-dark: #e62e2e;
+            --accent-green: #00d084;
+            --gray-dark: #1a1a1a;
+            --gray: #333333;
+            --gray-light: #4d4d4d;
+            --font-heading: 'Montserrat', sans-serif;
+            --font-body: 'Roboto', sans-serif;
+            --transition: all 0.3s ease;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            --shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.25);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--secondary);
+            background-color: var(--primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            background-color: transparent;
+            color: var(--secondary);
+            border: 2px solid var(--secondary);
+            border-radius: 30px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 14px;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn:hover {
+            background-color: var(--secondary);
+            color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--secondary);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--secondary);
+            color: var(--primary);
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 0;
+            transition: var(--transition);
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+
+        header.scrolled {
+            padding: 15px 0;
+            box-shadow: var(--shadow);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-img {
+            height: 40px;
+            width: auto;
+            max-width: 120px;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .logo::after {
+            display: none;
+        }
+
+        .logo:hover::after {
+            width: 100%;
+        }
+
+        .nav-menu {
+            display: flex;
+        }
+
+        .nav-item {
+            margin: 0 15px;
+            position: relative;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 14px;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--accent);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-green), var(--accent-yellow), var(--accent-red));
+            transition: var(--transition);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .header-icons {
+            display: flex;
+            align-items: center;
+        }
+
+        .icon-item {
+            margin-left: 20px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .icon-item:hover {
+            color: var(--accent);
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1556906781-2f0520405b71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80') no-repeat center center/cover;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 600px;
+            z-index: 1;
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+            color: var(--accent-light);
+        }
+
+        .hero-title {
+            font-family: var(--font-heading);
+            font-size: 60px;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .hero-title span {
+            color: var(--accent);
+        }
+
+        .hero-description {
+            font-size: 18px;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        /* Categories */
+        .section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            font-family: var(--font-heading);
+            font-size: 36px;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-green), var(--accent-yellow), var(--accent-red));
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .category-card {
+            position: relative;
+            height: 300px;
+            overflow: hidden;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .category-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .category-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            display: flex;
+            align-items: flex-end;
+            padding: 20px;
+            transition: var(--transition);
+        }
+
+        .category-name {
+            font-family: var(--font-heading);
+            font-size: 22px;
+            font-weight: 700;
+            transition: var(--transition);
+        }
+
+        .category-card:hover .category-img {
+            transform: scale(1.1);
+        }
+
+        .category-card:hover .category-overlay {
+            background: linear-gradient(to top, var(--accent), transparent);
+        }
+
+        /* Products */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 40px;
+            padding: 20px 0;
+        }
+
+        .product-card {
+            background: linear-gradient(145deg, #1e1e1e, #0a0a0a);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.05);
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #00d084, #ffd700, #ff3333);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+        }
+
+        .product-card:hover::before {
+            opacity: 1;
+        }
+
+        .product-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 
+                0 25px 50px rgba(0, 0, 0, 0.5),
+                0 0 0 1px rgba(255, 255, 255, 0.1),
+                0 0 80px rgba(136, 136, 136, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .product-img-container {
+            height: 320px;
+            overflow: hidden;
+            position: relative;
+            background: linear-gradient(45deg, #2a2a2a, #1a1a1a);
+        }
+
+        .product-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            filter: brightness(0.9) contrast(1.1);
+        }
+
+        .product-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                135deg,
+                rgba(0, 0, 0, 0.7) 0%,
+                rgba(136, 136, 136, 0.3) 50%,
+                rgba(0, 0, 0, 0.8) 100%
+            );
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(8px);
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .product-action {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--primary);
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .product-action:hover {
+            background: var(--accent);
+            color: var(--secondary);
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 0 8px 25px rgba(136, 136, 136, 0.4);
+        }
+
+        .product-action:nth-child(1):hover {
+            background: linear-gradient(135deg, #00d084, #00b571);
+        }
+
+        .product-action:nth-child(2):hover {
+            background: linear-gradient(135deg, #ff3333, #e62e2e);
+        }
+
+        .product-action:nth-child(3):hover {
+            background: linear-gradient(135deg, #ffd700, #e6c200);
+            color: var(--primary);
+        }
+
+        .product-card:hover .product-overlay {
+            opacity: 1;
+        }
+
+        .product-card:hover .product-img {
+            transform: scale(1.15) rotate(2deg);
+            filter: brightness(1.1) contrast(1.2) saturate(1.1);
+        }
+
+        .product-info {
+            padding: 25px;
+            background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.1) 100%);
+        }
+
+        .product-name {
+            font-family: var(--font-heading);
+            font-size: 19px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--secondary);
+            line-height: 1.3;
+            transition: color 0.3s ease;
+        }
+
+        .product-card:hover .product-name {
+            color: #ffffff;
+        }
+
+        .product-price {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 8px;
+        }
+
+        .product-old-price {
+            text-decoration: line-through;
+            color: var(--gray-light);
+            font-size: 16px;
+            font-weight: 500;
+            opacity: 0.7;
+        }
+
+        /* Promo Carousel */
+        .promo-section {
+            background-color: var(--gray-dark);
+            padding: 100px 0;
+        }
+
+        .carousel {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            height: 400px;
+        }
+
+        .carousel-inner {
+            display: flex;
+            transition: transform 0.5s ease;
+            height: 100%;
+        }
+
+        .carousel-item {
+            min-width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .carousel-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .carousel-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 0 50px;
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.8), transparent);
+        }
+
+        .carousel-title {
+            font-family: var(--font-heading);
+            font-size: 40px;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .carousel-description {
+            font-size: 18px;
+            max-width: 500px;
+            margin-bottom: 30px;
+        }
+
+        .carousel-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+        }
+
+        .carousel-control {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--gray-light);
+            margin: 0 5px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .carousel-control.active {
+            background-color: var(--accent);
+            transform: scale(1.3);
+        }
+
+        /* Newsletter */
+        .newsletter {
+            background-color: var(--accent);
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .newsletter-title {
+            font-family: var(--font-heading);
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .newsletter-description {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            font-size: 18px;
+        }
+
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 30px 0 0 30px;
+            font-family: var(--font-body);
+            font-size: 16px;
+        }
+
+        .newsletter-btn {
+            padding: 15px 30px;
+            background-color: var(--primary);
+            color: var(--secondary);
+            border: none;
+            border-radius: 0 30px 30px 0;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .newsletter-btn:hover {
+            background-color: var(--gray-dark);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--gray-dark);
+            padding: 80px 0 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .footer-brand .logo {
+            margin-bottom: 20px;
+        }
+
+        .footer-description {
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+
+        .social-links {
+            display: flex;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background-color: var(--gray);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 10px;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background-color: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        .footer-title {
+            font-family: var(--font-heading);
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .footer-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 30px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-link {
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+
+        .footer-link:hover {
+            opacity: 1;
+            color: var(--accent);
+            padding-left: 5px;
+        }
+
+        .contact-info li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .contact-info i {
+            margin-right: 10px;
+            color: var(--accent);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid var(--gray);
+            opacity: 0.7;
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 35px;
+            }
+            
+            .categories-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .hero-title {
+                font-size: 48px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                position: relative;
+            }
+            
+            .logo {
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+                order: 2;
+            }
+            
+            .menu-toggle {
+                display: block;
+                order: 1;
+            }
+            
+            .header-icons {
+                order: 3;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background-color: var(--primary);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: var(--transition);
+            }
+            
+            .nav-menu.active {
+                left: 0;
+            }
+            
+            .nav-item {
+                margin: 15px 0;
+            }
+            
+            .hero-title {
+                font-size: 36px;
+            }
+            
+            .carousel-title {
+                font-size: 30px;
+            }
+            
+            .carousel-content {
+                padding: 0 30px;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .newsletter-input {
+                border-radius: 30px;
+                margin-bottom: 10px;
+            }
+            
+            .newsletter-btn {
+                border-radius: 30px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+                padding: 15px 0;
+            }
+            
+            .product-card {
+                border-radius: 15px;
+            }
+            
+            .product-img-container {
+                height: 280px;
+            }
+            
+            .product-info {
+                padding: 20px;
+            }
+            
+            .categories-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-title {
+                font-size: 28px;
+            }
+            
+            .hero-title {
+                font-size: 32px;
+            }
+            
+            .hero-subtitle {
+                font-size: 14px;
+            }
+            
+            .hero-description {
+                font-size: 16px;
+            }
+        }
+
+        /* Animations */
+        .animate-fade-in {
+            animation: fadeIn 1s ease forwards;
+        }
+
+        .animate-slide-up {
+            animation: slideUp 0.8s ease forwards;
+        }
+
+        .animate-slide-left {
+            animation: slideLeft 0.8s ease forwards;
+        }
+
+        .animate-slide-right {
+            animation: slideRight 0.8s ease forwards;
+        }
+
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+
+        .delay-3 {
+            animation-delay: 0.6s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideLeft {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideRight {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        // Dados dos produtos
+        const productsData = [
+            {
+                id: 1,
+                name: "Camiseta Oversized Graphic",
+                price: 129.90,
+                oldPrice: 159.90,
+                image: "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                category: "camisetas"
+            },
+            {
+                id: 2,
+                name: "Moletom Com Capuz",
+                price: 249.90,
+                image: "https://images.unsplash.com/photo-1588117305388-c2631a279f82?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                category: "moletons"
+            },
+            {
+                id: 3,
+                name: "Calça Cargo Street",
+                price: 189.90,
+                image: "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                category: "calcas"
+            },
+            {
+                id: 4,
+                name: "Tênis Limited Edition",
+                price: 399.90,
+                oldPrice: 499.90,
+                image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                category: "tenis"
+            },
+            {
+                id: 5,
+                name: "Boné Streetwear",
+                price: 89.90,
+                image: "https://images.unsplash.com/photo-1575428652377-a2d80e2277fc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                category: "acessorios"
+            },
+            {
+                id: 6,
+                name: "Jaqueta Jeans Destroyed",
+                price: 299.90,
+                oldPrice: 349.90,
+                image: "https://images.unsplash.com/photo-1551028719-00167b16eac5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                category: "jaquetas"
+            },
+            {
+                id: 7,
+                name: "Regata Graphic",
+                price: 79.90,
+                image: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                category: "camisetas"
+            },
+            {
+                id: 8,
+                name: "Short Cargo",
+                price: 139.90,
+                image: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                category: "shorts"
+            }
+        ];
+
+        // Dados das categorias
+        const categoriesData = [
+            {
+                id: 1,
+                name: "Camisetas",
+                image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                id: 2,
+                name: "Calças",
+                image: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                id: 3,
+                name: "Acessórios",
+                image: "https://images.unsplash.com/photo-1556306535-0f09a537f0a3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                id: 4,
+                name: "Tênis",
+                image: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            }
+        ];
+
+        // Dados do carrossel
+        const carouselData = [
+            {
+                id: 1,
+                title: "BLACK FRIDAY ATÉ 70% OFF",
+                description: "Aproveite os melhores descontos em peças selecionadas. Edição limitada!",
+                image: "https://images.unsplash.com/photo-1463100099107-aa0980c362e6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80",
+                buttonText: "Conferir Ofertas"
+            },
+            {
+                id: 2,
+                title: "COLEÇÃO VERÃO 2023",
+                description: "As peças mais frescas e estilosas para o verão já estão disponíveis!",
+                image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1620&q=80",
+                buttonText: "Ver Coleção"
+            },
+            {
+                id: 3,
+                title: "FRETE GRÁTIS EM TODAS AS COMPRAS",
+                description: "Aproveite o frete grátis em todos os produtos durante o mês de lançamento!",
+                image: "https://images.unsplash.com/photo-1520006403909-838d6b92c22e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80",
+                buttonText: "Comprar Agora"
+            }
+        ];
+
+        // Componente Header
+        function Header() {
+            const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+            const [isScrolled, setIsScrolled] = React.useState(false);
+
+            React.useEffect(() => {
+                const handleScroll = () => {
+                    if (window.scrollY > 100) {
+                        setIsScrolled(true);
+                    } else {
+                        setIsScrolled(false);
+                    }
+                };
+
+                window.addEventListener('scroll', handleScroll);
+                return () => window.removeEventListener('scroll', handleScroll);
+            }, []);
+
+            const toggleMenu = () => {
+                setIsMenuOpen(!isMenuOpen);
+            };
+
+            return (
+                <header className={isScrolled ? 'scrolled' : ''}>
+                    <div className="container header-container">
+                        <a href="#" className="logo">
+                            <img src="https://via.placeholder.com/120x40/ffffff/000000?text=LOGO" alt="Logo" className="logo-img" />
+                        </a>
+                        
+                        <div className="menu-toggle" onClick={toggleMenu}>
+                            <i className={isMenuOpen ? 'fas fa-times' : 'fas fa-bars'}></i>
+                        </div>
+                        
+                        <ul className={`nav-menu ${isMenuOpen ? 'active' : ''}`}>
+                            <li className="nav-item"><a href="#" className="nav-link">Início</a></li>
+                            <li className="nav-item"><a href="#" className="nav-link">Novidades</a></li>
+                            <li className="nav-item"><a href="#" className="nav-link">Categorias</a></li>
+                            <li className="nav-item"><a href="#" className="nav-link">Promoções</a></li>
+                            <li className="nav-item"><a href="#" className="nav-link">Sobre</a></li>
+                        </ul>
+                        
+                        <div className="header-icons">
+                            <div className="icon-item"><i className="fas fa-shopping-cart"></i></div>
+                            <div className="icon-item"><i className="fas fa-user"></i></div>
+                        </div>
+                    </div>
+                </header>
+            );
+        }
+
+        // Componente Hero
+        function Hero() {
+            return (
+                <section className="hero">
+                    <div className="container hero-content animate-slide-up">
+                        <p className="hero-subtitle">Nova Coleção 2023</p>
+                        <h1 className="hero-title">ESTILO URBANO <span>QUE IMPACTA</span></h1>
+                        <p className="hero-description">Descubra as peças mais exclusivas da cultura streetwear que combinam conforto, estilo e atitude.</p>
+                        <a href="#" className="btn">Comprar Agora</a>
+                    </div>
+                </section>
+            );
+        }
+
+        // Componente Categories
+        function Categories() {
+            return (
+                <section className="section">
+                    <div className="container">
+                        <h2 className="section-title">Categorias</h2>
+                        
+                        <div className="categories-grid">
+                            {categoriesData.map((category, index) => (
+                                <div key={category.id} className={`category-card animate-fade-in delay-${index}`}>
+                                    <img src={category.image} alt={category.name} className="category-img" />
+                                    <div className="category-overlay">
+                                        <h3 className="category-name">{category.name}</h3>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
+        // Componente ProductCard
+        function ProductCard({ product, animationClass }) {
+            return (
+                <div className={`product-card ${animationClass}`}>
+                    <div className="product-img-container">
+                        <img src={product.image} alt={product.name} className="product-img" />
+                        <div className="product-overlay">
+                            <div className="product-actions">
+                                <div className="product-action"><i className="fas fa-shopping-cart"></i></div>
+                                <div className="product-action"><i className="fas fa-heart"></i></div>
+                                <div className="product-action"><i className="fas fa-eye"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="product-info">
+                        <h3 className="product-name">{product.name}</h3>
+                        <div className="product-price">
+                            R$ {product.price.toFixed(2)}
+                            {product.oldPrice && <span className="product-old-price">R$ {product.oldPrice.toFixed(2)}</span>}
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        // Componente Products
+        function Products() {
+            const [filter, setFilter] = React.useState('todos');
+            
+            const filteredProducts = filter === 'todos' 
+                ? productsData 
+                : productsData.filter(product => product.category === filter);
+            
+            return (
+                <section className="section" style={{backgroundColor: '#0a0a0a'}}>
+                    <div className="container">
+                        <h2 className="section-title">Destaques</h2>
+                        
+                        <div style={{display: 'flex', justifyContent: 'center', marginBottom: '40px'}}>
+                            <button 
+                                className={`btn ${filter === 'todos' ? '' : 'btn-outline'}`} 
+                                style={{margin: '0 10px'}}
+                                onClick={() => setFilter('todos')}
+                            >
+                                Todos
+                            </button>
+                            <button 
+                                className={`btn ${filter === 'camisetas' ? '' : 'btn-outline'}`} 
+                                style={{margin: '0 10px'}}
+                                onClick={() => setFilter('camisetas')}
+                            >
+                                Camisetas
+                            </button>
+                            <button 
+                                className={`btn ${filter === 'calcas' ? '' : 'btn-outline'}`} 
+                                style={{margin: '0 10px'}}
+                                onClick={() => setFilter('calcas')}
+                            >
+                                Calças
+                            </button>
+                            <button 
+                                className={`btn ${filter === 'tenis' ? '' : 'btn-outline'}`} 
+                                style={{margin: '0 10px'}}
+                                onClick={() => setFilter('tenis')}
+                            >
+                                Tênis
+                            </button>
+                        </div>
+                        
+                        <div className="products-grid">
+                            {filteredProducts.map((product, index) => (
+                                <ProductCard 
+                                    key={product.id} 
+                                    product={product} 
+                                    animationClass={`animate-slide-left delay-${index % 4}`}
+                                />
+                            ))}
+                        </div>
+                        
+                        <div style={{textAlign: 'center', marginTop: '50px'}}>
+                            <a href="#" className="btn btn-outline">Ver Todos os Produtos</a>
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
+        // Componente Carousel
+        function Carousel() {
+            const [currentSlide, setCurrentSlide] = React.useState(0);
+            
+            React.useEffect(() => {
+                const interval = setInterval(() => {
+                    setCurrentSlide((prev) => (prev + 1) % carouselData.length);
+                }, 5000);
+                
+                return () => clearInterval(interval);
+            }, []);
+            
+            return (
+                <section className="promo-section">
+                    <div className="container">
+                        <h2 className="section-title">Promoções</h2>
+                        
+                        <div className="carousel">
+                            <div className="carousel-inner" style={{ transform: `translateX(-${currentSlide * 100}%)` }}>
+                                {carouselData.map(item => (
+                                    <div key={item.id} className="carousel-item">
+                                        <img src={item.image} alt="Promoção" className="carousel-img" />
+                                        <div className="carousel-content">
+                                            <h3 className="carousel-title">{item.title}</h3>
+                                            <p className="carousel-description">{item.description}</p>
+                                            <a href="#" className="btn">{item.buttonText}</a>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                            
+                            <div className="carousel-controls">
+                                {carouselData.map((_, index) => (
+                                    <div 
+                                        key={index} 
+                                        className={`carousel-control ${index === currentSlide ? 'active' : ''}`}
+                                        onClick={() => setCurrentSlide(index)}
+                                    ></div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
+        // Componente Newsletter
+        function Newsletter() {
+            const [email, setEmail] = React.useState('');
+            
+            const handleSubmit = (e) => {
+                e.preventDefault();
+                alert(`Obrigado por se inscrever com o email: ${email}`);
+                setEmail('');
+            };
+            
+            return (
+                <section className="newsletter">
+                    <div className="container">
+                        <h3 className="newsletter-title">Fique por dentro</h3>
+                        <p className="newsletter-description">Cadastre-se para receber em primeira mão nossas novidades, lançamentos exclusivos e promoções especiais.</p>
+                        
+                        <form className="newsletter-form" onSubmit={handleSubmit}>
+                            <input 
+                                type="email" 
+                                className="newsletter-input" 
+                                placeholder="Seu melhor e-mail"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                required
+                            />
+                            <button type="submit" className="newsletter-btn">Inscrever</button>
+                        </form>
+                    </div>
+                </section>
+            );
+        }
+
+        // Componente Footer
+        function Footer() {
+            return (
+                <footer>
+                    <div className="container">
+                        <div className="footer-grid">
+                            <div className="footer-brand">
+                                <a href="#" className="logo">
+                                    <img src="https://via.placeholder.com/120x40/ffffff/000000?text=LOGO" alt="Logo" className="logo-img" />
+                                </a>
+                                <p className="footer-description">A mais nova loja de streetwear do Brasil, trazendo as melhores marcas e tendências para você se expressar através da moda.</p>
+                                
+                                <div className="social-links">
+                                    <a href="#" className="social-link"><i className="fab fa-instagram"></i></a>
+                                    <a href="#" className="social-link"><i className="fab fa-twitter"></i></a>
+                                    <a href="#" className="social-link"><i className="fab fa-tiktok"></i></a>
+                                    <a href="#" className="social-link"><i className="fab fa-youtube"></i></a>
+                                </div>
+                            </div>
+                            
+                            <div className="footer-links">
+                                <h4 className="footer-title">Links Rápidos</h4>
+                                <ul>
+                                    <li><a href="#" className="footer-link">Sobre Nós</a></li>
+                                    <li><a href="#" className="footer-link">Nossas Lojas</a></li>
+                                    <li><a href="#" className="footer-link">Trocas e Devoluções</a></li>
+                                    <li><a href="#" className="footer-link">Perguntas Frequentes</a></li>
+                                    <li><a href="#" className="footer-link">Trabalhe Conosco</a></li>
+                                </ul>
+                            </div>
+                            
+                            <div className="footer-links">
+                                <h4 className="footer-title">Categorias</h4>
+                                <ul>
+                                    <li><a href="#" className="footer-link">Camisetas</a></li>
+                                    <li><a href="#" className="footer-link">Moletons</a></li>
+                                    <li><a href="#" className="footer-link">Calças</a></li>
+                                    <li><a href="#" className="footer-link">Acessórios</a></li>
+                                    <li><a href="#" className="footer-link">Tênis</a></li>
+                                </ul>
+                            </div>
+                            
+                            <div className="footer-contact">
+                                <h4 className="footer-title">Contato</h4>
+                                <ul className="contact-info">
+                                    <li><i className="fas fa-map-marker-alt"></i> Rua das Tendências, 123 - São Paulo, SP</li>
+                                    <li><i className="fas fa-phone"></i> (11) 9999-9999</li>
+                                    <li><i className="fas fa-envelope"></i> contato@urbanstreet.com.br</li>
+                                    <li><i className="fas fa-clock"></i> Seg a Sex: 9h às 18h | Sáb: 10h às 16h</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div className="copyright">
+                            <p>&copy; 2023 URBAN STREET - Todos os direitos reservados</p>
+                        </div>
+                    </div>
+                </footer>
+            );
+        }
+
+        // Componente principal App
+        function App() {
+            React.useEffect(() => {
+                // Animação ao scroll
+                const animateOnScroll = () => {
+                    const elements = document.querySelectorAll('.animate-fade-in, .animate-slide-up, .animate-slide-left, .animate-slide-right');
+                    
+                    elements.forEach(element => {
+                        const elementPosition = element.getBoundingClientRect().top;
+                        const screenPosition = window.innerHeight / 1.3;
+                        
+                        if (elementPosition < screenPosition) {
+                            element.style.opacity = 1;
+                            element.style.transform = 'translate(0, 0)';
+                        }
+                    });
+                };
+
+                window.addEventListener('scroll', animateOnScroll);
+                window.addEventListener('load', animateOnScroll);
+
+                return () => {
+                    window.removeEventListener('scroll', animateOnScroll);
+                };
+            }, []);
+
+            return (
+                <div className="App">
+                    <Header />
+                    <Hero />
+                    <Categories />
+                    <Products />
+                    <Carousel />
+                    <Newsletter />
+                    <Footer />
+                </div>
+            );
+        }
+
+        // Renderizar a aplicação
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
